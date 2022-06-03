@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Tunes{% endblock title %}
 
 {% block content %}
 <a href="{% url 'tune_new' %}"> + Add a new tune</a>
-{% for tune in object_list %}
+
+<form method="GET">{% csrf_token %}
+    {{ filter.form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Search</button>
+</form>
+
+<br>
+{% for tune in filter.qs %}
 
 {% if user == tune.performer %}
 <div class=" card">

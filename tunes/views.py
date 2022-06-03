@@ -2,11 +2,17 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Tune, Setlist
+from .filters import TuneFilter
 
 
 class TuneListView(ListView):
     model = Tune
     template_name = "tune_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = TuneFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class TuneDetailView(DetailView):
