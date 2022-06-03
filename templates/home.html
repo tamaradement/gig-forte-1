@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+<p><a href="{% url 'tune_list' %}">Tune library</a></p>
+<p><a href="{% url 'setlist_collection' %}">Setlists</a></p>
+<p><a href="#">Upcoming gigs</a></p>
+<p><a href="#">Gig history</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a> |
+<a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+{% endblock content %}

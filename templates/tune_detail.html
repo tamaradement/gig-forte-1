@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="tune-entry">
+    <h2>{{ object.title }}</h2>
+    <p>by {{ object.composer }} | {{ object.key }}</p>
+</div>
+<p><a href="{% url 'tune_edit' tune.pk %}">Edit</a> |
+    <a href="{% url 'tune_delete' tune.pk %}">Delete</a>
+</p>
+<p>Back to <a href="{% url 'tune_list' %}">Back to tune library</a>.</p> {% endblock content %}
