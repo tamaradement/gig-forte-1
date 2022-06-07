@@ -19,8 +19,8 @@
 </div>
 
 
-<p><a href="#">Edit</a> |
-    <a href="#">Delete</a>
+<p><a href="{% url 'setlist_edit' setlist.pk %}">Edit</a> |
+    <a href="{% url 'setlist_delete' setlist.pk %}">Delete</a>
 </p>
 <p>Back to <a href="{% url 'setlist_collection' %}">Back to setlists</a>.</p>
 {% endblock content %}

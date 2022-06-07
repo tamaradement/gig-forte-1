@@ -2,7 +2,7 @@
 {% block title %}Setlists{% endblock title %}
 
 {% block content %}
-<a href="#"> + Add a setlist</a>
+<a href="{% url 'setlist_new' %}"> + Add a setlist</a>
 {% for setlist in object_list %}
 
 {% if user == setlist.performer %}
@@ -14,8 +14,8 @@
     <div class="card-body"></div>
 
     <div class="card-footer text-center text-muted">
-        <a href="#">Edit</a> |
-        <a href="#">Delete</a>
+        <a href="{% url 'setlist_edit' setlist.pk %}">Edit</a> |
+        <a href="{% url 'setlist_delete' setlist.pk %}">Delete</a>
     </div>
 </div>
 <br />
