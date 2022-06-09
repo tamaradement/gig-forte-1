@@ -3,6 +3,9 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Tune, Setlist
 from .filters import TuneFilter
+from .forms import SetlistForm
+
+# Tune views:
 
 
 class TuneListView(ListView):
@@ -53,9 +56,7 @@ class TuneCreateView(CreateView):
     )
 
 
-# ==========
-# Setlists
-# ==========
+# Setlist views:
 
 
 class SetlistCollection(ListView):
@@ -70,12 +71,13 @@ class SetlistDetailView(DetailView):
 
 class SetlistUpdateView(UpdateView):
     model = Setlist
-    fields = (
-        "title",
-        "description",
-        "tunes",
-    )
     template_name = "setlist_edit.html"
+    form_class = SetlistForm
+
+    def get_form_kwargs(self):
+        kwargs = super(SetlistUpdateView, self).get_form_kwargs()
+        kwargs["performer"] = self.request.user
+        return kwargs
 
 
 class SetlistDeleteView(DeleteView):
@@ -87,9 +89,9 @@ class SetlistDeleteView(DeleteView):
 class SetlistCreateView(CreateView):
     model = Setlist
     template_name = "setlist_new.html"
-    fields = (
-        "title",
-        "performer",
-        "description",
-        "tunes",
-    )
+    form_class = SetlistForm
+
+    def get_form_kwargs(self):
+        kwargs = super(SetlistCreateView, self).get_form_kwargs()
+        kwargs["performer"] = self.request.user
+        return kwargs
