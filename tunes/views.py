@@ -10,7 +10,7 @@ from .forms import SetlistForm
 
 class TuneListView(ListView):
     model = Tune
-    template_name = "tune_list.html"
+    template_name = "tunes/tune_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,7 +20,7 @@ class TuneListView(ListView):
 
 class TuneDetailView(DetailView):
     model = Tune
-    template_name = "tune_detail.html"
+    template_name = "tunes/tune_detail.html"
 
 
 class TuneUpdateView(UpdateView):
@@ -33,18 +33,18 @@ class TuneUpdateView(UpdateView):
         "genre",
         "pdf",
     )
-    template_name = "tune_edit.html"
+    template_name = "tunes/tune_edit.html"
 
 
 class TuneDeleteView(DeleteView):
     model = Tune
-    template_name = "tune_delete.html"
+    template_name = "tunes/tune_delete.html"
     success_url = reverse_lazy("tune_list")
 
 
 class TuneCreateView(CreateView):
     model = Tune
-    template_name = "tune_new.html"
+    template_name = "tunes/tune_new.html"
     fields = (
         "title",
         "composer",
@@ -61,17 +61,17 @@ class TuneCreateView(CreateView):
 
 class SetlistCollection(ListView):
     model = Setlist
-    template_name = "setlist_collection.html"
+    template_name = "setlists/setlist_collection.html"
 
 
 class SetlistDetailView(DetailView):
     model = Setlist
-    template_name = "setlist_detail.html"
+    template_name = "setlists/setlist_detail.html"
 
 
 class SetlistUpdateView(UpdateView):
     model = Setlist
-    template_name = "setlist_edit.html"
+    template_name = "setlists/setlist_edit.html"
     form_class = SetlistForm
 
     def get_form_kwargs(self):
@@ -82,13 +82,13 @@ class SetlistUpdateView(UpdateView):
 
 class SetlistDeleteView(DeleteView):
     model = Setlist
-    template_name = "setlist_delete.html"
+    template_name = "setlists/setlist_delete.html"
     success_url = reverse_lazy("setlist_collection")
 
 
 class SetlistCreateView(CreateView):
     model = Setlist
-    template_name = "setlist_new.html"
+    template_name = "setlists/setlist_new.html"
     form_class = SetlistForm
 
     def get_form_kwargs(self):

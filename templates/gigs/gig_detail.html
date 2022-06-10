@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="tune-entry">
+    <h2>{{ object.title }}</h2>
+    <p>{{ object.created }}</p>
+</div>
+<p><a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
+    <a href="{% url 'gig_delete' gig.pk %}">Delete</a>
+</p>
+<p>Back to <a href="{% url 'gig_list' %}">Back to gigs.</a></p>
+{% endblock content %}
