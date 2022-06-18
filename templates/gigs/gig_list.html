@@ -13,7 +13,9 @@
             class="text-muted"></span>
         <a href="{% url 'gig_detail' gig.pk %}">Details</a>
     </div>
-    <div class="card-body"></div>
+    <div class="card-body">
+        {{ gig.location.name }} &middot {{ gig.location.city }}, {{ gig.location.state }}
+    </div>
 
     <div class="card-footer text-center text-muted">
         <a href="{% url 'gig_edit' gig.pk %}">Edit</a> |

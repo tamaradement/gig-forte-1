@@ -3,22 +3,6 @@ from django.db import models
 from django.urls import reverse
 
 
-class Gig(models.Model):
-    title = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_now_add=True)
-    event_date = models.DateTimeField(blank=True, null=True)
-    bandleader = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse("gig_detail", args=[str(self.id)])
-
-
 class Venue(models.Model):
     name = models.CharField(max_length=255)
     address_1 = models.CharField(max_length=128)
@@ -36,3 +20,20 @@ class Venue(models.Model):
 
     def get_absolute_url(self):
         return reverse("venue_detail", args=[str(self.id)])
+
+
+class Gig(models.Model):
+    title = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    event_date = models.DateTimeField(blank=True, null=True)
+    bandleader = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    location = models.ForeignKey(Venue, on_delete=models.PROTECT, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("gig_detail", args=[str(self.id)])

@@ -2,7 +2,15 @@
 {% block content %}
 <div class="tune-entry">
     <h2>{{ object.title }}</h2>
-    <p>{{ object.created }}</p>
+    <p>{{ object.event_date }}</p>
+    <p>@ {{ object.location.name }} {% if object.location.website %}
+        <a href={{ object.location.website}}>Website</a>
+        {% endif %}
+    </p>
+    <p>{{ object.location.address_1 }}</p>
+    <p>{{ object.location.city }} | {{ object.location.state }} </p>
+
+
 </div>
 <p><a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
     <a href="{% url 'gig_delete' gig.pk %}">Delete</a>

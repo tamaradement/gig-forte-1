@@ -10,7 +10,7 @@ class DateTimePickerInput(forms.DateTimeInput):
 class GigCreateForm(forms.ModelForm):
     class Meta:
         model = Gig
-        fields = ("title", "event_date", "bandleader")
+        fields = ("title", "event_date", "bandleader", "location")
 
         def __init__(self, *args, **kwargs):
             super(GigCreateForm, self).__init__(*args, **kwargs)
