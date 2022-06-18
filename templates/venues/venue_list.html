@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Venue list{% endblock title %}
+
+{% block content %}
+<a href="{% url 'venue_new' %}"> + Add venue</a>
+
+{% for venue in object_list %}
+
+{% if user == venue.performer %}
+<div class=" card">
+    <div class="card-header">
+        <span class="font-weight-bold">{{ venue.name}} </span> &middot {{ venue.city }}, {{venue.state}}<span
+            class="text-muted"></span>
+        <a href="{% url 'venue_detail' venue.pk %}">Details</a>
+    </div>
+    <div class="card-body"></div>
+
+    <div class="card-footer text-center text-muted">
+        <a href="{% url 'venue_edit' venue.pk %}">Edit</a> |
+        <a href="{% url 'venue_delete' venue.pk %}">Delete</a>
+    </div>
+</div>
+<br />
+{% endif %}
+{% endfor %}
+{% endblock content %}

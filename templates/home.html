@@ -8,6 +8,7 @@ Hi {{ user.username }}!
 <p><a href="{% url 'setlist_collection' %}">Setlists</a></p>
 <p><a href="{% url 'gig_list' %}">Upcoming gigs</a></p>
 <p><a href="{% url 'gig_history' %}">Gig history</a></p>
+<p><a href="{% url 'venue_list' %}">Venues</a></p>
 {% else %}
 <p>You are not logged in</p>
 <a href="{% url 'login' %}">Log In</a> |
