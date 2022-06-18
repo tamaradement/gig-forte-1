@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
+    "bootstrap_datepicker_plus",
     # Local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",

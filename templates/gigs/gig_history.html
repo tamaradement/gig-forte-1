@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Gig list{% endblock title %}
+{% block title %}Gig History{% endblock title %}
 
 {% block content %}
-<a href="{% url 'gig_new' %}"> + Add gig</a>
-<p><a href="{% url 'gig_history' %}">Gig history</a></p>
+<p><a href="{% url 'gig_list' %}">Upcoming gigs</a></p>
 {% for gig in object_list %}
 
 {% if user == gig.bandleader %}
@@ -16,8 +15,6 @@
     <div class="card-body"></div>
 
     <div class="card-footer text-center text-muted">
-        <a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
-        <a href="{% url 'gig_delete' gig.pk %}">Delete</a>
     </div>
 </div>
 <br />

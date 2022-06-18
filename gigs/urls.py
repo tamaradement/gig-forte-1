@@ -5,6 +5,7 @@ from .views import (
     GigUpdateView,
     GigDeleteView,
     GigCreateView,
+    GigHistory,
 )
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path("<int:pk>/edit/", GigUpdateView.as_view(), name="gig_edit"),
     path("<int:pk>/delete/", GigDeleteView.as_view(), name="gig_delete"),
     path("new/", GigCreateView.as_view(), name="gig_new"),
+    path("history", GigHistory.as_view(), name="gig_history"),
     path("", GigListView.as_view(), name="gig_list"),
 ]
