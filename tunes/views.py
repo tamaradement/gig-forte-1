@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Tune, Setlist
@@ -8,7 +9,7 @@ from .forms import SetlistForm
 # Tune views:
 
 
-class TuneListView(ListView):
+class TuneListView(LoginRequiredMixin, ListView):
     model = Tune
     template_name = "tunes/tune_list.html"
 
@@ -18,12 +19,12 @@ class TuneListView(ListView):
         return context
 
 
-class TuneDetailView(DetailView):
+class TuneDetailView(LoginRequiredMixin, DetailView):
     model = Tune
     template_name = "tunes/tune_detail.html"
 
 
-class TuneUpdateView(UpdateView):
+class TuneUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tune
     fields = (
         "title",
@@ -35,14 +36,22 @@ class TuneUpdateView(UpdateView):
     )
     template_name = "tunes/tune_edit.html"
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
-class TuneDeleteView(DeleteView):
+
+class TuneDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tune
     template_name = "tunes/tune_delete.html"
     success_url = reverse_lazy("tune_list")
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
-class TuneCreateView(CreateView):
+
+class TuneCreateView(LoginRequiredMixin, CreateView):
     model = Tune
     template_name = "tunes/tune_new.html"
     fields = (
@@ -52,27 +61,34 @@ class TuneCreateView(CreateView):
         "notes",
         "genre",
         "pdf",
-        "performer",
     )
+
+    def form_valid(self, form):
+        form.instance.performer = self.request.user
+        return super().form_valid(form)
 
 
 # Setlist views:
 
 
-class SetlistCollection(ListView):
+class SetlistCollection(LoginRequiredMixin, ListView):
     model = Setlist
     template_name = "setlists/setlist_collection.html"
 
 
-class SetlistDetailView(DetailView):
+class SetlistDetailView(LoginRequiredMixin, DetailView):
     model = Setlist
     template_name = "setlists/setlist_detail.html"
 
 
-class SetlistUpdateView(UpdateView):
+class SetlistUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Setlist
     template_name = "setlists/setlist_edit.html"
     form_class = SetlistForm
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
     def get_form_kwargs(self):
         kwargs = super(SetlistUpdateView, self).get_form_kwargs()
@@ -80,16 +96,24 @@ class SetlistUpdateView(UpdateView):
         return kwargs
 
 
-class SetlistDeleteView(DeleteView):
+class SetlistDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Setlist
     template_name = "setlists/setlist_delete.html"
     success_url = reverse_lazy("setlist_collection")
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
-class SetlistCreateView(CreateView):
+
+class SetlistCreateView(LoginRequiredMixin, CreateView):
     model = Setlist
     template_name = "setlists/setlist_new.html"
     form_class = SetlistForm
+
+    def form_valid(self, SetlistForm):
+        SetlistForm.instance.performer = self.request.user
+        return super().form_valid(SetlistForm)
 
     def get_form_kwargs(self):
         kwargs = super(SetlistCreateView, self).get_form_kwargs()

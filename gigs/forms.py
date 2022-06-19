@@ -9,7 +9,6 @@ class GigCreateForm(forms.ModelForm):
         fields = (
             "title",
             "event_date",
-            "bandleader",
             "location",
             "call_time",
             "start_time",

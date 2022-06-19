@@ -1,13 +1,13 @@
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Gig, Venue
 from .forms import GigCreateForm
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 import datetime
 
 
-class GigListView(ListView):
+class GigListView(LoginRequiredMixin, ListView):
     model = Gig
     template_name = "gigs/gig_list.html"
 
@@ -15,7 +15,7 @@ class GigListView(ListView):
         return Gig.objects.filter(event_date__gte=datetime.date.today())
 
 
-class GigHistory(ListView):
+class GigHistory(LoginRequiredMixin, ListView):
     model = Gig
     template_name = "gigs/gig_history.html"
 
@@ -23,43 +23,55 @@ class GigHistory(ListView):
         return Gig.objects.filter(event_date__lte=datetime.date.today())
 
 
-class GigDetailView(DetailView):
+class GigDetailView(LoginRequiredMixin, DetailView):
     model = Gig
     template_name = "gigs/gig_detail.html"
 
 
-class GigUpdateView(UpdateView):
+class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Gig
     template_name = "gigs/gig_edit.html"
     form_class = GigCreateForm
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.bandleader == self.request.user
 
-class GigDeleteView(DeleteView):
+
+class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Gig
     template_name = "gigs/gig_delete.html"
     success_url = reverse_lazy("gig_list")
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.bandleader == self.request.user
 
-class GigCreateView(CreateView):
+
+class GigCreateView(LoginRequiredMixin, CreateView):
     model = Gig
     template_name = "gigs/gig_new.html"
     form_class = GigCreateForm
+
+    def form_valid(self, form):
+        form.instance.bandleader = self.request.user
+        return super().form_valid(form)
 
 
 # Venue views
 
 
-class VenueList(ListView):
+class VenueList(LoginRequiredMixin, ListView):
     model = Venue
     template_name = "venues/venue_list.html"
 
 
-class VenueDetailView(DetailView):
+class VenueDetailView(LoginRequiredMixin, DetailView):
     model = Venue
     template_name = "venues/venue_detail.html"
 
 
-class VenueUpdateView(UpdateView):
+class VenueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Venue
     fields = (
         "name",
@@ -69,18 +81,25 @@ class VenueUpdateView(UpdateView):
         "state",
         "zip_code",
         "website",
-        "performer",
     )
     template_name = "venues/venue_edit.html"
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
-class VenueDeleteView(DeleteView):
+
+class VenueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Venue
     template_name = "venues/venue_delete.html"
     success_url = reverse_lazy("venue_list")
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.performer == self.request.user
 
-class VenueCreateView(CreateView):
+
+class VenueCreateView(LoginRequiredMixin, CreateView):
     model = Venue
     fields = (
         "name",
@@ -90,6 +109,9 @@ class VenueCreateView(CreateView):
         "state",
         "zip_code",
         "website",
-        "performer",
     )
     template_name = "venues/venue_new.html"
+
+    def form_valid(self, form):
+        form.instance.performer = self.request.user
+        return super().form_valid(form)
