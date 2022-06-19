@@ -1,6 +1,8 @@
+from datetime import datetime
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from tunes.models import Setlist
 
 
 class Venue(models.Model):
@@ -31,6 +33,13 @@ class Gig(models.Model):
         on_delete=models.CASCADE,
     )
     location = models.ForeignKey(Venue, on_delete=models.PROTECT, blank=True, null=True)
+    call_time = models.TimeField(blank=True, null=True)
+    start_time = models.TimeField(default=datetime.now())
+    end_time = models.TimeField(default=datetime.now())
+    pay = models.IntegerField(default=0)
+    setlist = models.ForeignKey(
+        Setlist, on_delete=models.PROTECT, blank=True, null=True
+    )
 
     def __str__(self):
         return self.title

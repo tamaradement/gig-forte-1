@@ -6,9 +6,23 @@
     <p>@ {{ object.location.name }} {% if object.location.website %}
         <a href={{ object.location.website}}>Website</a>
         {% endif %}
+        {{ object.location.address_1 }},
+        {{ object.location.city }} | {{ object.location.state }}
     </p>
-    <p>{{ object.location.address_1 }}</p>
-    <p>{{ object.location.city }} | {{ object.location.state }} </p>
+
+    <p>Engagement: {{ object.start_time }} - {{ object.end_time }}</p>
+    <p>Pay: ${{ object.pay }}</p>
+
+    <p>Setlist:</p>
+    <ul>
+        {% for tune in object.setlist.tunes.all %}
+        <li>
+            <a href="{% url 'tune_detail' tune.pk %}">{{ tune.title }}</a>
+        </li>
+
+
+        {% endfor %}
+    </ul>
 
 
 </div>

@@ -30,8 +30,8 @@ class GigDetailView(DetailView):
 
 class GigUpdateView(UpdateView):
     model = Gig
-    fields = ("title", "event_date", "bandleader", "location")
     template_name = "gigs/gig_edit.html"
+    form_class = GigCreateForm
 
 
 class GigDeleteView(DeleteView):
