@@ -19,7 +19,7 @@
         <span class="font-weight-bold">{{ tune.title }} </span> &middot; <span class="text-muted">
             {{ tune.composer }}</span>
         <a href="{% url 'tune_detail' tune.pk %}">Details</a>
-        {% if tune.pdf %} | <a href={{ tune.pdf }}>PDF chart</a> {% endif %}
+
 
     </div>
     <div class="card-body">
