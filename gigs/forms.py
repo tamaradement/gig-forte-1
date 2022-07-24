@@ -14,4 +14,5 @@ class GigCreateForm(forms.ModelForm):
             "start_time",
             "end_time",
             "setlist",
+            "personnel",
         )

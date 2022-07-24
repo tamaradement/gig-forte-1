@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from tunes.models import Setlist
+from accounts.models import CustomUser
 
 
 class Venue(models.Model):
@@ -29,7 +30,7 @@ class Gig(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     event_date = models.DateTimeField(blank=True, null=True)
     bandleader = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        CustomUser,
         on_delete=models.CASCADE,
     )
     location = models.ForeignKey(Venue, on_delete=models.PROTECT, blank=True, null=True)
@@ -40,6 +41,7 @@ class Gig(models.Model):
     setlist = models.ForeignKey(
         Setlist, on_delete=models.PROTECT, blank=True, null=True
     )
+    personnel = models.ManyToManyField(CustomUser, related_name='gig_staff')
 
     def __str__(self):
         return self.title

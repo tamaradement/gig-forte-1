@@ -5,16 +5,17 @@
 <a href="{% url 'gig_new' %}"> + Add gig</a>
 <p><a href="{% url 'gig_history' %}">Gig history</a></p>
 {% for gig in object_list %}
-
-{% if user == gig.bandleader %}
-<div class=" card">
+<div class="card">
     <div class="card-header">
-        <span class="font-weight-bold">{{ gig.title }} </span> &middot {{ gig.event_date }} <span
-            class="text-muted"></span>
+        <span class="font-weight-bold">{{ gig.title }}</span> 
+        &middot {{ gig.event_date }} | Bandleader:
+        <span class="text-muted">
+            {{ gig.bandleader }}
+        </span> |
         <a href="{% url 'gig_detail' gig.pk %}">Details</a>
     </div>
     <div class="card-body">
-        {{ gig.location.name }} &middot {{ gig.location.city }}, {{ gig.location.state }}
+        {{ gig.location.name }} &middot {{ gig.location.city }}, {{ gig.location.state }} 
     </div>
 
     <div class="card-footer text-center text-muted">
@@ -23,6 +24,6 @@
     </div>
 </div>
 <br />
-{% endif %}
+
 {% endfor %}
 {% endblock content %}

@@ -12,15 +12,29 @@ class GigListView(LoginRequiredMixin, ListView):
     template_name = "gigs/gig_list.html"
 
     def get_queryset(self):
-        return Gig.objects.filter(event_date__gte=datetime.date.today())
+        user_is_personnel = Gig.objects.filter(personnel=self.request.user).exclude  (event_date__lte=datetime.date.today()).distinct() 
 
+        user_is_bandleader = Gig.objects.filter(bandleader=self.request.user).exclude(event_date__lte=datetime.date.today()).distinct() 
 
+        combined_list = user_is_personnel.union(user_is_bandleader).order_by('event_date')
+
+        return combined_list  
+
+        
+    
 class GigHistory(LoginRequiredMixin, ListView):
     model = Gig
     template_name = "gigs/gig_history.html"
 
+
     def get_queryset(self):
-        return Gig.objects.filter(event_date__lte=datetime.date.today())
+        user_is_personnel = Gig.objects.filter(personnel=self.request.user).exclude  (event_date__gte=datetime.date.today()).distinct() 
+
+        user_is_bandleader = Gig.objects.filter(bandleader=self.request.user).exclude(event_date__gte=datetime.date.today()).distinct() 
+
+        combined_list = user_is_personnel.union(user_is_bandleader).order_by('-event_date')
+        
+        return combined_list 
 
 
 class GigDetailView(LoginRequiredMixin, DetailView):

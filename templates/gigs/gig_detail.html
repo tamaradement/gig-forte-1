@@ -19,8 +19,14 @@
         <li>
             <a href="{% url 'tune_detail' tune.pk %}">{{ tune.title }}</a>
         </li>
-
-
+        {% endfor %}
+    </ul>
+    <p>Personnel</p>
+    <ul>
+        {% for user in object.personnel.all %}
+        <li>
+            {{ user.username }}: {{ user.instrument }}
+        </li>
         {% endfor %}
     </ul>
 
