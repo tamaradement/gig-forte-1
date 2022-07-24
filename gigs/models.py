@@ -42,6 +42,7 @@ class Gig(models.Model):
         Setlist, on_delete=models.PROTECT, blank=True, null=True
     )
     personnel = models.ManyToManyField(CustomUser, related_name='gig_staff')
+    acccepts = models.ManyToManyField(CustomUser, related_name='gig_accepts')
 
     def __str__(self):
         return self.title

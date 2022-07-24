@@ -20,7 +20,15 @@ class GigListView(LoginRequiredMixin, ListView):
 
         return combined_list  
 
-        
+class GigInvitations(LoginRequiredMixin, ListView):
+    model = Gig
+    template_name = "gigs/gig_invitations.html"
+
+    def get_queryset(self):
+        user_is_personnel = Gig.objects.filter(personnel=self.request.user).exclude  (event_date__lte=datetime.date.today()).exclude(bandleader=self.request.user).distinct()
+
+        return user_is_personnel.order_by('-created')
+       
     
 class GigHistory(LoginRequiredMixin, ListView):
     model = Gig

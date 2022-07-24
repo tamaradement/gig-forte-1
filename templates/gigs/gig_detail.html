@@ -29,6 +29,14 @@
         </li>
         {% endfor %}
     </ul>
+    <p>Accepts</p>
+    <ul>
+        {% for user in object.acccepts.all %}
+        <li>
+            {{ user.username }}: {{ user.instrument }}
+        </li>
+        {% endfor %}
+    </ul>
 
 
 </div>

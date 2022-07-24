@@ -6,6 +6,7 @@ from .views import (
     GigDeleteView,
     GigCreateView,
     GigHistory,
+    GigInvitations,
     VenueList,
     VenueDetailView,
     VenueUpdateView,
@@ -20,6 +21,7 @@ urlpatterns = [
     path("<int:pk>/delete/", GigDeleteView.as_view(), name="gig_delete"),
     path("new/", GigCreateView.as_view(), name="gig_new"),
     path("history", GigHistory.as_view(), name="gig_history"),
+    path("gig_invites", GigInvitations.as_view(), name="gig_invitations"),
     path("", GigListView.as_view(), name="gig_list"),
     # Venues
     path("venues/<int:pk>/", VenueDetailView.as_view(), name="venue_detail"),
