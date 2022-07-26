@@ -15,11 +15,7 @@
     </div>
     <div class="card-body">
         {{ gig.location.name }} &middot {{ gig.location.city }}, {{ gig.location.state }} 
-    </div>
-
-    <div class="card-footer text-center text-muted">
-        <a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
-        <a href="{% url 'gig_delete' gig.pk %}">Delete</a>
+        <p>Pay: ${{ gig.pay }}</p>
     </div>
 </div>
 <br />

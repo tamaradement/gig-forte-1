@@ -1,14 +1,18 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+
 <div class="tune-entry">
     <h2>{{ object.title }}</h2>
     <p>{{ object.event_date }}</p>
-    <p>@ {{ object.location.name }} {% if object.location.website %}
+    <p>@ {{ object.location.name }} 
+        {% if object.location.website %}
         <a href={{ object.location.website}}>Website</a>
         {% endif %}
         {{ object.location.address_1 }},
         {{ object.location.city }} | {{ object.location.state }}
     </p>
+    <p>Bandleader: {{ object.bandleader }}</p>
 
     <p>Engagement: {{ object.start_time }} - {{ object.end_time }}</p>
     <p>Pay: ${{ object.pay }}</p>
@@ -21,7 +25,8 @@
         </li>
         {% endfor %}
     </ul>
-    <p>Personnel</p>
+    {% if object.personnel.all %}
+    <p>Unconfirmed Personnel:</p>
     <ul>
         {% for user in object.personnel.all %}
         <li>
@@ -29,7 +34,9 @@
         </li>
         {% endfor %}
     </ul>
-    <p>Accepts</p>
+    {% endif %}
+
+    <p>Confirmed Personnel</p>
     <ul>
         {% for user in object.acccepts.all %}
         <li>
@@ -37,11 +44,37 @@
         </li>
         {% endfor %}
     </ul>
+    <br/>
+    <hr>
+    <br/>
+    <h3>Accept/Decline?</h3>
+    <form action="{% url 'accept_gig' gig.pk %}" method="post">{% csrf_token %}
+        {{ form|crispy }}
+        <button 
+            class="btn btn-success ml-2" 
+            type="submit" 
+            name="gig_id" 
+            value="{{ gig.id }}">Accept Gig
+        </button>
+    </form>
+    <br/>
+    <form action="" method="post">{% csrf_token %}
+        {{ form|crispy }}
+        <button 
+            class="btn btn-danger ml-2" 
+            type="submit" 
+            name="gig_id" 
+            value="{{ gig.id }}">Decline Gig
+        </button>
+    </form>
 
-
+<br/>
 </div>
+{% if user == object.bandleader %}
 <p><a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
     <a href="{% url 'gig_delete' gig.pk %}">Delete</a>
 </p>
-<p>Back to <a href="{% url 'gig_list' %}">Back to upcoming gigs.</a></p>
+{% endif %}
+
+<p><a href="{% url 'gig_list' %}">Upcoming Gigs</a></p>
 {% endblock content %}

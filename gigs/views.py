@@ -1,10 +1,18 @@
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Gig, Venue
 from .forms import GigCreateForm
+from django.http import HttpResponseRedirect
 import datetime
+
+def AcceptGigView(request, pk):
+    gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
+    gig.acccepts.add(request.user)
+    gig.personnel.remove(request.user)
+    return HttpResponseRedirect(reverse('gig_detail', args=[str(pk)]))
 
 
 class GigListView(LoginRequiredMixin, ListView):
@@ -12,7 +20,7 @@ class GigListView(LoginRequiredMixin, ListView):
     template_name = "gigs/gig_list.html"
 
     def get_queryset(self):
-        user_is_personnel = Gig.objects.filter(personnel=self.request.user).exclude  (event_date__lte=datetime.date.today()).distinct() 
+        user_is_personnel = Gig.objects.filter(acccepts=self.request.user).exclude  (event_date__lte=datetime.date.today()).distinct() 
 
         user_is_bandleader = Gig.objects.filter(bandleader=self.request.user).exclude(event_date__lte=datetime.date.today()).distinct() 
 
