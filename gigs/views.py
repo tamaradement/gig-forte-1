@@ -14,6 +14,14 @@ def AcceptGigView(request, pk):
     gig.personnel.remove(request.user)
     return HttpResponseRedirect(reverse('gig_detail', args=[str(pk)]))
 
+def DeclineGigView(request, pk):
+    gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
+    gig.declines.add(request.user)
+    gig.personnel.remove(request.user)
+    if gig.acccepts.filter(id=request.user.id).exists():
+        gig.acccepts.remove(request.user)
+    return HttpResponseRedirect(reverse('gig_invitations'))
+
 
 class GigListView(LoginRequiredMixin, ListView):
     model = Gig
@@ -44,7 +52,7 @@ class GigHistory(LoginRequiredMixin, ListView):
 
 
     def get_queryset(self):
-        user_is_personnel = Gig.objects.filter(personnel=self.request.user).exclude  (event_date__gte=datetime.date.today()).distinct() 
+        user_is_personnel = Gig.objects.filter(acccepts=self.request.user).exclude  (event_date__gte=datetime.date.today()).distinct() 
 
         user_is_bandleader = Gig.objects.filter(bandleader=self.request.user).exclude(event_date__gte=datetime.date.today()).distinct() 
 

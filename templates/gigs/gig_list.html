@@ -2,8 +2,12 @@
 {% block title %}Gig list{% endblock title %}
 
 {% block content %}
+<h1>Upcoming Gigs</h1>
 <a href="{% url 'gig_new' %}"> + Add gig</a>
-<p><a href="{% url 'gig_history' %}">Gig history</a></p>
+<p>
+    <a href="{% url 'gig_history' %}">Gig history</a> |
+    <a href="{% url 'gig_invitations' %}">Gig Invitations</a>
+</p>
 {% for gig in object_list %}
 <div class="card">
     <div class="card-header">

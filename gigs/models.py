@@ -43,6 +43,7 @@ class Gig(models.Model):
     )
     personnel = models.ManyToManyField(CustomUser, related_name='gig_staff')
     acccepts = models.ManyToManyField(CustomUser, related_name='gig_accepts')
+    declines = models.ManyToManyField(CustomUser, related_name='gig_declines')
 
     def __str__(self):
         return self.title

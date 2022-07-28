@@ -36,7 +36,7 @@
     </ul>
     {% endif %}
 
-    <p>Confirmed Personnel</p>
+    <p>Confirmed Personnel:</p>
     <ul>
         {% for user in object.acccepts.all %}
         <li>
@@ -44,10 +44,22 @@
         </li>
         {% endfor %}
     </ul>
+    {% if user == gig.bandleader %}
+    <p>Personnel that declined:</p>
+    <ul>
+        {% for user in object.declines.all %}
+        <li>
+            {{ user.username }}: {{ user.instrument }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <br/>
     <hr>
     <br/>
     <h3>Accept/Decline?</h3>
+
     <form action="{% url 'accept_gig' gig.pk %}" method="post">{% csrf_token %}
         {{ form|crispy }}
         <button 
@@ -57,8 +69,10 @@
             value="{{ gig.id }}">Accept Gig
         </button>
     </form>
-    <br/>
-    <form action="" method="post">{% csrf_token %}
+
+<br/>
+
+    <form action="{% url 'decline_gig' gig.pk %}" method="post">{% csrf_token %}
         {{ form|crispy }}
         <button 
             class="btn btn-danger ml-2" 
@@ -67,6 +81,8 @@
             value="{{ gig.id }}">Decline Gig
         </button>
     </form>
+    
+
 
 <br/>
 </div>
