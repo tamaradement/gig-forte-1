@@ -32,6 +32,7 @@ class TuneUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         "key",
         "notes",
         "genre",
+        "pdf",
     )
     template_name = "tunes/tune_edit.html"
 
@@ -59,6 +60,7 @@ class TuneCreateView(LoginRequiredMixin, CreateView):
         "key",
         "notes",
         "genre",
+        "pdf",
     )
 
     def form_valid(self, form):

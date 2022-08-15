@@ -23,7 +23,9 @@
 
     </div>
     <div class="card-body">
-        Key: {{ tune.key }} </div>
+        Key: {{ tune.key }} 
+        <a href={{ tune.pdf }}>PDF</a>
+    </div>
     <div class="card-footer text-center text-muted">
         <a href="{% url 'tune_edit' tune.pk %}">Edit</a> |
         <a href="{% url 'tune_delete' tune.pk %}">Delete</a>

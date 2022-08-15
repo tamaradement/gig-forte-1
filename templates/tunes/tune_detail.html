@@ -2,7 +2,8 @@
 {% block content %}
 <div class="tune-entry">
     <h2>{{ object.title }}</h2>
-    <p>by {{ object.composer }} | {{ object.key }}</p>
+    <p>by {{ object.composer }} | {{ object.key }} | </p>
+    <a href={{ object.pdf }}>PDF</a>
 </div>
 <p><a href="{% url 'tune_edit' tune.pk %}">Edit</a> |
     <a href="{% url 'tune_delete' tune.pk %}">Delete</a>
