@@ -1,5 +1,6 @@
 from pathlib import Path
 from environs import Env
+from decouple import config
 
 env = Env()
 env.read_env()
@@ -117,11 +118,11 @@ USE_TZ = True
 
 
 # Amazon S3 Settings (This is the new stuff)
-AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 
-AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
