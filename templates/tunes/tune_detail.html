@@ -11,10 +11,12 @@
     <p>Chart: <a href="https://tunes-1-bucket.s3.amazonaws.com/static/{{ tune.pdf }}">PDF</a></p>
     {% endif %}
     <hr>
+    {% if user == object.performer %}
     <p>
         <a href="{% url 'tune_edit' tune.pk %}">Edit</a> |
         <a href="{% url 'tune_delete' tune.pk %}">Delete</a>
     </p>
+    {% endif %}
     
     <p>Back to <a href="{% url 'tune_list' %}">tune library</a>.</p> 
 </div>
