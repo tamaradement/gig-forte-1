@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock title %}
 {% block content %}
 {% if user.is_authenticated %}
-Hi {{ user.username }}!
+Hi {{ user.first_name }}!
 <p><a href="{% url 'logout' %}">Log Out</a></p>
 <p><a href="{% url 'tune_list' %}">Tune library</a></p>
 <p><a href="{% url 'setlist_collection' %}">Setlists</a></p>

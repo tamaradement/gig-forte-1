@@ -149,17 +149,6 @@ STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 
-# Old stuff 
-# STATIC_URL = "/static/"
-# STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
-# STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-# MEDIA_URL = "tunes/"
-# STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
-# STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
-
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
