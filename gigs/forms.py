@@ -17,3 +17,7 @@ class GigCreateForm(forms.ModelForm):
             "setlist",
             "personnel",
         )
+    
+    def __init__(self, performer, *args, **kwargs):
+        super(GigCreateForm, self).__init__(*args, **kwargs)
+        self.fields["setlist"].queryset = Setlist.objects.filter(performer=performer)
