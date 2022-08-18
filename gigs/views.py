@@ -74,6 +74,11 @@ class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         obj = self.get_object()
         return obj.bandleader == self.request.user
+    
+    def get_form_kwargs(self):
+        kwargs = super(GigUpdateView, self).get_form_kwargs()
+        kwargs["performer"] = self.request.user
+        return kwargs
 
 
 class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
