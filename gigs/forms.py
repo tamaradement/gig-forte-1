@@ -13,6 +13,7 @@ class GigCreateForm(forms.ModelForm):
             "call_time",
             "start_time",
             "end_time",
+            "pay",
             "setlist",
             "personnel",
         )
