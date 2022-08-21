@@ -2,7 +2,8 @@
 {% block title %}Gig list{% endblock title %}
 
 {% block content %}
-<h1>Upcoming Gigs</h1>
+<h1>Upcoming Gigs:</h1>
+<h2>You have {{ object_list|length }} upcoming gigs. </h2>
 <a href="{% url 'gig_new' %}"> + Add gig</a>
 <p>
     <a href="{% url 'gig_history' %}">Gig history</a> |
