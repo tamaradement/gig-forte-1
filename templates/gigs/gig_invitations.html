@@ -2,8 +2,8 @@
 {% block title %}Gig Invitations{% endblock title %}
 
 {% block content %}
-<h1>Gig Invitations:</h1>
-<h2>You have {{ object_list|length }} invitations. </h2>
+<h1>Gig Invitations: {{ object_list|length }}</h1>
+
 <p>
     <a href="{% url 'gig_list' %}">Upcoming Gigs</a> | 
     <a href="{% url 'gig_history' %}">Gig history</a> 
