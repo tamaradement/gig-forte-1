@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Decline Message{% endblock title %}
+
+{% block content %}
+    <h1>Hey, it's all good!</h1> 
+    <p>The bandleader has been notified.</p>
+    <p><a href="{% url 'gig_invitations' %}">Back to gig invitations</a></p>
+{% endblock content %}

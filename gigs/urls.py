@@ -9,6 +9,8 @@ from .views import (
     GigInvitations,
     AcceptGigView,
     DeclineGigView,
+    AcceptMessageView,
+    DeclineMessageView,
     VenueList,
     VenueDetailView,
     VenueUpdateView,
@@ -26,6 +28,8 @@ urlpatterns = [
     path("gig_invites", GigInvitations.as_view(), name="gig_invitations"),
     path("<int:pk>/accept", AcceptGigView, name='accept_gig'),
     path("<int:pk>/decline", DeclineGigView, name='decline_gig'),
+    path("decline_message/", DeclineMessageView.as_view(), name="decline_message"),
+    path("accept_message/", AcceptMessageView.as_view(), name="accept_message"),
     path("", GigListView.as_view(), name="gig_list"),
     # Venues
     path("venues/<int:pk>/", VenueDetailView.as_view(), name="venue_detail"),

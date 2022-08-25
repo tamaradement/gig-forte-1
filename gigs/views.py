@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
@@ -6,13 +7,26 @@ from django.urls import reverse_lazy, reverse
 from .models import Gig, Venue
 from .forms import GigCreateForm
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 import datetime
 
 def AcceptGigView(request, pk):
     gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
     gig.acccepts.add(request.user)
     gig.personnel.remove(request.user)
-    return HttpResponseRedirect(reverse('gig_detail', args=[str(pk)]))
+    send_accept_email(gig, request.user)
+    return HttpResponseRedirect(reverse('accept_message'))
+
+def send_accept_email(gig, user):
+    bandleader = gig.bandleader.email
+    first = user.first_name
+    last = user.last_name
+    venue = gig.location
+
+    send_mail('{} has accepted your gig!'.format(first), 'Great news! {} {} has accepted your gig at {}! Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(first, last, venue), 'tamara.dement@gmail.com', [bandleader], fail_silently=False)
+
+class AcceptMessageView(TemplateView):
+    template_name = "gigs/accept_message.html"
 
 def DeclineGigView(request, pk):
     gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
@@ -20,7 +34,19 @@ def DeclineGigView(request, pk):
     gig.personnel.remove(request.user)
     if gig.acccepts.filter(id=request.user.id).exists():
         gig.acccepts.remove(request.user)
-    return HttpResponseRedirect(reverse('gig_invitations'))
+    send_decline_email(gig, request.user)
+    return HttpResponseRedirect(reverse('decline_message'))
+
+def send_decline_email(gig, user):
+    bandleader = gig.bandleader.email
+    first = user.first_name
+    last = user.last_name
+    venue = gig.location
+
+    send_mail('{} has declined your gig'.format(first), 'Unfortunately, {} {} has declined your gig at {}. No worries though! Sign in to your account and invite someone else! https://gig-forte-1.herokuapp.com/'.format(first, last, venue), 'tamara.dement@gmail.com', [bandleader], fail_silently=False)
+
+class DeclineMessageView(TemplateView):
+    template_name = "gigs/decline_message.html"
 
 
 class GigListView(LoginRequiredMixin, ListView):
@@ -74,6 +100,11 @@ class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         obj = self.get_object()
         return obj.bandleader == self.request.user
+    
+    def form_valid(self, form):
+        form.instance.bandleader = self.request.user
+        form.send_email()
+        return super().form_valid(form)
     
     def get_form_kwargs(self):
         kwargs = super(GigUpdateView, self).get_form_kwargs()

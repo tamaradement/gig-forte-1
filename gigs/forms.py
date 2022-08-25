@@ -25,9 +25,12 @@ class GigCreateForm(forms.ModelForm):
     
     def send_email(self):
         personnel = self.cleaned_data.get("personnel")
+        bandleader_first = self.instance.bandleader.first_name
+        bandleader_last = self.instance.bandleader.last_name
+
         email_addresses = []
         for person in personnel:
             email_addresses.append(person.email)
             
-        send_mail('New gig offer!', 'Hello! You have a new gig offer on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/', 'tamara.dement@gmail.com', email_addresses, fail_silently=False)
+        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader_first, bandleader_last), 'tamara.dement@gmail.com', email_addresses, fail_silently=False)
 
