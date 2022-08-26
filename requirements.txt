@@ -1,4 +1,5 @@
 asgiref==3.5.2
+beautifulsoup4==4.11.1
 black==22.3.0
 boto3==1.24.52
 botocore==1.27.52
@@ -8,11 +9,13 @@ dj-database-url==0.5.0
 dj-email-url==1.0.5
 Django==3.2.13
 django-bootstrap-datepicker-plus==4.0.0
+django-bootstrap4==22.2
 django-cache-url==3.4.2
 django-crispy-forms==1.13.0
 django-decouple==2.1
 django-filter==21.1
 django-storages==1.13.1
+django-tempus-dominus==5.1.2.17
 environs==9.3.4
 gunicorn==20.1.0
 jmespath==1.0.1
@@ -29,6 +32,7 @@ python-dotenv==0.20.0
 pytz==2022.1
 s3transfer==0.6.0
 six==1.16.0
+soupsieve==2.3.2.post1
 sqlparse==0.4.2
 tomli==2.0.1
 urllib3==1.26.11
