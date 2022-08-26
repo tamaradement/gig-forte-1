@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {{ form.media }}
 
 {% block content %}
@@ -8,4 +9,12 @@
     {{ form|crispy }}
     <button class="btn btn-success ml-2" type="submit">Save</button>
 </form>
+
+<script>
+    $(function () {
+      $("#datetimepicker1").datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+      });
+    });
+</script>
 {% endblock content %}

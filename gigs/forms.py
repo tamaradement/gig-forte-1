@@ -2,6 +2,7 @@ from django import forms
 from .models import Gig
 from tunes.models import Setlist
 from django.core.mail import send_mail
+from tempus_dominus.widgets import DateTimePicker
 
 
 class GigCreateForm(forms.ModelForm):
@@ -18,6 +19,19 @@ class GigCreateForm(forms.ModelForm):
             "setlist",
             "personnel",
         )
+        widgets = {
+            'event_date': DateTimePicker(
+                options={
+                    'useCurrent': True,
+                    'collapse': False,
+                },
+                attrs={
+                    'append': 'fa fa-calendar',
+                    'icon_toggle': True,
+                }
+            ),
+        }
+        
     
     def __init__(self, performer, *args, **kwargs):
         super(GigCreateForm, self).__init__(*args, **kwargs)

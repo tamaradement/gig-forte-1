@@ -7,7 +7,7 @@ from accounts.models import CustomUser
 
 def default_start_time():
     now = datetime.now()
-    start = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    start = now.replace(hour=16, minute=0)
     return start
 
 def default_end_time():

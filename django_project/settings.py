@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "gigs.apps.GigsConfig",
     # S3 
     "storages",
+    "tempus_dominus"
 ]
 
 MIDDLEWARE = [
