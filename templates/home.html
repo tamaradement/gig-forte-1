@@ -11,11 +11,7 @@ Hi {{ user.first_name }}!
 <p><a href="{% url 'gig_invitations' %}">Gig Invitations</a></p>
 <p><a href="{% url 'venue_list' %}">Venues</a></p>
 {% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> |
-<a href="{% url 'signup' %}">Sign Up</a>
 <br>
-<hr>
 <h1>How to use GigForte:</h1>
 <ul>
     <li><a href="https://www.loom.com/share/8f0b57a0ad6848a88a633aff4035a891">Add some tunes.</a></li>
@@ -24,7 +20,11 @@ Hi {{ user.first_name }}!
     <li><a href="https://www.loom.com/share/432ac36fb0364a7c836f601e65eccf06">Book a gig!</a></li>
     <li><a href="https://www.loom.com/share/432ac36fb0364a7c836f601e65eccf06">Accept / Decline</a></li>
 </ul>
-<p></p>
+<br>
+<hr>
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a> |
+<a href="{% url 'signup' %}">Sign Up</a>
 
 {% endif %}
 {% endblock content %}
