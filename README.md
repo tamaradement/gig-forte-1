@@ -16,7 +16,7 @@ A productivity app for musicians, small ensembles and bandleaders.
 ```sh
 % pip install -r requirements.txt
 ```
-- Once `pip` has finished downloading the dependencies, spin up the server.
+- Once `pip` has finished, spin up the server.
 ```sh
 % python manage.py runserver
 ```
