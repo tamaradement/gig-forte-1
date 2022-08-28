@@ -28,10 +28,10 @@ A productivity app for musicians, small ensembles and bandleaders.
 - [Accept / Decline form](https://www.loom.com/share/432ac36fb0364a7c836f601e65eccf06)
 ## Data structure:
 - CustomUser
- - First name
- - Last name
- - email
- - username
+    - First name
+    - Last name
+    - email
+    - username
 - Tune
 - Setlist
 - Venue
