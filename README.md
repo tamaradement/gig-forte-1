@@ -11,7 +11,7 @@ $ cd tunes-1
 ```sh
 $ pip install -r requirements.txt
 ```
-- Once `pip` has finished downloading the dependencies, sping up the server.
+- Once `pip` has finished downloading the dependencies, spin up the server.
 ```sh
 $ python manage.py runserver
 ```
