@@ -28,11 +28,42 @@ A productivity app for musicians, small ensembles and bandleaders.
 - [Accept / Decline form](https://www.loom.com/share/432ac36fb0364a7c836f601e65eccf06)
 ## Data structure:
 - CustomUser
-    - First name
-    - Last name
-    - email
-    - username
+    - Instrument
 - Tune
+    - Title
+    - Composer
+    - Key
+    - Notes
+    - Genre
+    - PDF
+    - Performer(CustomUser)
 - Setlist
+    - Title
+    - Performer(CustomUser)
+    - Description
+    - Tunes(Tune)
+        - A setlist can have many tunes.
 - Venue
+    - Name
+    - Address 1
+    - Address 2
+    - City
+    - State
+    - Zip
+    - Website
+    - Performer(CustomUser)
 - Gig
+    - Title
+    - Created
+    - Event date
+    - Bandleader(CustomUser)
+        - A gig has one bandleader, and a bandleader can lead many gigs.
+    - Call time
+    - Start time
+    - End time
+    - Pay
+    - Setlist(Setlist)
+        - A gig can have one setlist, and setlist can belogn to many gigs.
+    - Personnel(CustomUser, ManyToMany)
+    - Accepts(CustomUser, ManyToMany)
+    - Declines(CustomUser, ManyToMany)
