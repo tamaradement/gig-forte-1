@@ -3,17 +3,22 @@ A productivity app for musicians, small ensembles and bandleaders.
 ## Setup
 - First, clone the repository:
 ```sh
-$ git clone https://github.com/tamaradement/tunes-1.git
-$ cd tunes-1
+% git clone https://github.com/tamaradement/tunes-1.git
+% cd tunes-1
 ```
 - Create a virtual environment to install dependencies in and activate it.
+```sh
+% python3 -m venv .venv
+% source .venv/bin/activate
+(.venv) %
+```
 - Then install the dependencies.
 ```sh
-$ pip install -r requirements.txt
+% pip install -r requirements.txt
 ```
 - Once `pip` has finished downloading the dependencies, spin up the server.
 ```sh
-$ python manage.py runserver
+% python manage.py runserver
 ```
 ## How to use the app:
 - [Add a tune](https://www.loom.com/share/8f0b57a0ad6848a88a633aff4035a891)
