@@ -37,14 +37,13 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "django_filters",
     "bootstrap_datepicker_plus",
+    "storages",
+    "tempus_dominus",
     # Local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
     "tunes.apps.TunesConfig",
     "gigs.apps.GigsConfig",
-    # S3 
-    "storages",
-    "tempus_dominus"
 ]
 
 MIDDLEWARE = [
@@ -70,7 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+                "django.contrib.messages.context_processors.messages"
             ],
         },
     },
@@ -174,4 +173,6 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
+
+
 

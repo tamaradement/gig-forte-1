@@ -99,12 +99,13 @@ class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
+        print(obj.personnel.all())
         return obj.bandleader == self.request.user
     
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
-        # Query the gig here...
-        form.send_email()
+        gig = self.get_object()
+        form.send_update_gig_email(gig)
         return super().form_valid(form)
     
     def get_form_kwargs(self):
@@ -130,7 +131,7 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
-        form.send_email()
+        form.send_initial_gig_email()
         return super().form_valid(form)
     
     def get_form_kwargs(self):
@@ -140,7 +141,6 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 
 
 # Venue views
-
 
 class VenueList(LoginRequiredMixin, ListView):
     model = Venue

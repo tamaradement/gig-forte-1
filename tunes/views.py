@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from .models import Tune, Setlist
 from .filters import TuneFilter
 from .forms import SetlistForm
+from django.conf import settings
 
 # Tune views:
 
@@ -16,12 +17,20 @@ class TuneListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["filter"] = TuneFilter(self.request.GET, queryset=self.get_queryset())
+        context['AWS_STORAGE_BUCKET_NAME'] = settings.AWS_STORAGE_BUCKET_NAME
         return context
 
 
 class TuneDetailView(LoginRequiredMixin, DetailView):
     model = Tune
     template_name = "tunes/tune_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TuneDetailView, self).get_context_data(**kwargs)
+        context['AWS_STORAGE_BUCKET_NAME'] = settings.AWS_STORAGE_BUCKET_NAME
+        print(context)
+
+        return context
 
 
 class TuneUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

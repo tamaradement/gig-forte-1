@@ -8,7 +8,7 @@
     <p>Arrangement Notes: {{ object.notes }}</p>
     <br>
     {% if object.pdf %}
-    <p>Chart: <a href="https://tunes-1-bucket.s3.amazonaws.com/static/{{ tune.pdf }}">PDF</a></p>
+    <p>Chart: <a href="https://{{ AWS_STORAGE_BUCKET_NAME }}.s3.amazonaws.com/static/{{ tune.pdf }}">PDF</a></p>
     {% endif %}
     <hr>
     {% if user == object.performer %}

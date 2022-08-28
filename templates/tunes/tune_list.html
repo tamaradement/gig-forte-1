@@ -23,7 +23,7 @@
     <div class="card-body">
         Key: {{ tune.key }}  
         {% if tune.pdf %} | 
-        <a href="https://tunes-1-bucket.s3.amazonaws.com/static/{{ tune.pdf }}">PDF</a>
+        <a href="https://{{ AWS_STORAGE_BUCKET_NAME }}.s3.amazonaws.com/static/{{ tune.pdf }}">PDF</a>
         {% endif %}
     </div>
     <div class="card-footer text-center text-muted">
