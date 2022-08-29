@@ -26,7 +26,8 @@ A productivity app for musicians, small ensembles and bandleaders.
 - [Add venues](https://www.loom.com/share/5b32ac6467204c6d879f803b852b6776)
 - [Create a gig](https://www.loom.com/share/eaf8be7335e94519983823930639fc33)
 - [Accept / Decline form](https://www.loom.com/share/432ac36fb0364a7c836f601e65eccf06)
-## Data structure:
+## Data structure
+### Objects:
 - CustomUser
     - Instrument
 - Tune
