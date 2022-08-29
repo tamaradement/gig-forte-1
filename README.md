@@ -66,27 +66,26 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Start time
     - End time
     - Pay
-    - Setlist(Setlist, OneToMany)
-        - A gig can have one setlist, and setlist can belong to many gigs.
-    - Personnel(CustomUser, ManyToMany)
-    - Accepts(CustomUser, ManyToMany)
-    - Declines(CustomUser, ManyToMany)
+    - Setlist(Setlist)
+    - Personnel(CustomUser)
+    - Accepts(CustomUser)
+    - Declines(CustomUser)
 ### Relationships:
-- Performer/Tune: OneToMany
+- Performer - Tune: OneToMany
     - A performer can have many tunes. 
     - A tune can belong to one performer.
-- Performer/Setlist: OneToMany
+- Performer - Setlist: OneToMany
     - A performer can have many setlists.
     - A setlist can belong to one performer.
-- Tune/Setlist: ManyToMany
+- Tune - Setlist: ManyToMany
     - A tune can belong to many setlists.
     - A setlist can have many tunes. 
-- Performer::Venue: OneToMany
+- Performer - Venue: OneToMany
     - A CustomUser can have many venues.
     - A venue can belong to one CustomUser.
-- Gig::Bandleader: OneToMany
+- Gig - Bandleader: OneToMany
     - A bandleader can lead many gigs.
     - A gig has only one bandleader.
-- Gig::Personnel/Accepts/Declines: ManyToMany
+- Gig - Personnel/Accepts/Declines: ManyToMany
     - A gig can have many personnel/accepts/declines.
     - Personnel can be assigned to, accept or decline many gigs.
