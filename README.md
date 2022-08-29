@@ -29,6 +29,11 @@ A productivity app for musicians, small ensembles and bandleaders.
 ## Data structure
 ### Objects:
 - CustomUser
+    - Username
+    - Password
+    - Email
+    - First name
+    - Last name
     - Instrument
 - Tune
     - Title
@@ -42,7 +47,7 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Title
     - Performer(CustomUser)
     - Description
-    - Tunes(Tune, ManyToMany)
+    - Tunes(Tune)
 - Venue
     - Name
     - Address 1
@@ -57,7 +62,6 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Created
     - Event date
     - Bandleader(CustomUser)
-        - A gig has one bandleader, and a bandleader can lead many gigs.
     - Call time
     - Start time
     - End time
@@ -67,3 +71,22 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Personnel(CustomUser, ManyToMany)
     - Accepts(CustomUser, ManyToMany)
     - Declines(CustomUser, ManyToMany)
+### Relationships:
+- Performer/Tune: OneToMany
+    - A performer can have many tunes. 
+    - A tune can belong to one performer.
+- Performer/Setlist: OneToMany
+    - A performer can have many setlists.
+    - A setlist can belong to one performer.
+- Tune/Setlist: ManyToMany
+    - A tune can belong to many setlists.
+    - A setlist can have many tunes. 
+- Performer::Venue: OneToMany
+    - A CustomUser can have many venues.
+    - A venue can belong to one CustomUser.
+- Gig::Bandleader: OneToMany
+    - A bandleader can lead many gigs.
+    - A gig has only one bandleader.
+- Gig::Personnel/Accepts/Declines: ManyToMany
+    - A gig can have many personnel/accepts/declines.
+    - Personnel can be assigned to, accept or decline many gigs.
