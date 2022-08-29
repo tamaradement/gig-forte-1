@@ -41,8 +41,7 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Title
     - Performer(CustomUser)
     - Description
-    - Tunes(Tune)
-        - A setlist can have many tunes.
+    - Tunes(Tune, ManyToMany)
 - Venue
     - Name
     - Address 1
@@ -62,8 +61,8 @@ A productivity app for musicians, small ensembles and bandleaders.
     - Start time
     - End time
     - Pay
-    - Setlist(Setlist)
-        - A gig can have one setlist, and setlist can belogn to many gigs.
+    - Setlist(Setlist, OneToMany)
+        - A gig can have one setlist, and setlist can belong to many gigs.
     - Personnel(CustomUser, ManyToMany)
     - Accepts(CustomUser, ManyToMany)
     - Declines(CustomUser, ManyToMany)
