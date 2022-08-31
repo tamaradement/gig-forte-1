@@ -6,7 +6,9 @@ from tempus_dominus.widgets import DateTimePicker
 from django.conf import settings
 
 
+
 class GigCreateForm(forms.ModelForm):
+    # end_time = forms.TimeField(input_formats=['%I:%M %p'])
     class Meta:
         model = Gig
         fields = (
@@ -31,6 +33,7 @@ class GigCreateForm(forms.ModelForm):
                     'icon_toggle': True,
                 }
             ),
+          
         }    
     
     def __init__(self, performer, *args, **kwargs):

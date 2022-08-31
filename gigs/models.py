@@ -5,20 +5,10 @@ from django.urls import reverse
 from tunes.models import Setlist
 from accounts.models import CustomUser
 
-def default_start_time():
-    now = datetime.now()
-    start = now.replace(hour=16, minute=0)
-    return start
-
-def default_end_time():
-    now = datetime.now()
-    end = now.replace(hour=19, minute=0, second=0, microsecond=0)
-    return end
 
 def default_event_date():
-    now = datetime.now()
-    date = now.replace(hour=16, minute=0, second=0, microsecond=0)
-    return date
+    now = datetime.now().replace(hour=0, minute=0)
+    return now.strftime("%Y-%m-%d %I:%M %p") 
 
 
 class Venue(models.Model):
@@ -43,15 +33,15 @@ class Venue(models.Model):
 class Gig(models.Model):
     title = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
-    event_date = models.DateTimeField(blank=True, null=True, default=default_event_date, help_text='Write date/time in this format: yyyy-mm-dd hh-mm-ss')
+    event_date = models.DateTimeField(blank=True, null=True, default=datetime.now().replace(hour=0, minute=0, second=0), help_text='Write date/time in this format: yyyy-mm-dd hh-mm-ss')
     bandleader = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
     )
     location = models.ForeignKey(Venue, on_delete=models.PROTECT, blank=True, null=True)
     call_time = models.TimeField(blank=True, null=True)
-    start_time = models.TimeField(default=default_start_time())
-    end_time = models.TimeField(default=default_end_time())
+    start_time = models.TimeField(default="04:00 PM")
+    end_time = models.TimeField(default="07:00 PM")
     pay = models.IntegerField(default=0)
     setlist = models.ForeignKey(
         Setlist, on_delete=models.PROTECT, blank=True, null=True

@@ -10,6 +10,12 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 import datetime
 
+def get_24_hour_time(str1):
+    if str1[-2:] == "AM":
+        print(True)
+    else:
+        print(False)
+
 def AcceptGigView(request, pk):
     gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
     gig.acccepts.add(request.user)
@@ -104,6 +110,7 @@ class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
+        print(form.instance.end_time)
         gig = self.get_object()
         form.send_update_gig_email(gig)
         return super().form_valid(form)
@@ -131,7 +138,11 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
+        print(form.instance.end_time) # "19:00:00"
+        print(form.instance.end_time.hour)
         form.send_initial_gig_email()
+        # form.instance.end_time = datetime.strptime(form.instance.end_time, "%I:%M %p")
+        
         return super().form_valid(form)
     
     def get_form_kwargs(self):
