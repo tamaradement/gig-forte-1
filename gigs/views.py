@@ -8,6 +8,7 @@ from .models import Gig, Venue
 from .forms import GigCreateForm
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
+from django.conf import settings
 import datetime
 
 def get_24_hour_time(str1):
@@ -110,7 +111,6 @@ class GigUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
-        print(form.instance.end_time)
         gig = self.get_object()
         form.send_update_gig_email(gig)
         return super().form_valid(form)
@@ -129,7 +129,23 @@ class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.bandleader == self.request.user
+    
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        personnel = obj.personnel.all()
+        bandleader = obj.bandleader.first_name + ' ' + obj.bandleader.last_name
+        bandleader_email = obj.bandleader.email
+        date = obj.event_date
+        from_email = settings.DEFAULT_FROM_EMAIL
 
+        email_addresses = []
+        for person in personnel:
+            email_addresses.append(person.email)
+            
+        send_mail('Gig cancelation', 'Uh oh! Your gig with {} on {} has been canceled :-( For more details, contact your bandleader: {}'.format(bandleader, date, bandleader_email), '{}'.format(from_email), email_addresses, fail_silently=False)
+
+        response = super(GigDeleteView, self).delete(request, *args, **kwargs)
+        return response
 
 class GigCreateView(LoginRequiredMixin, CreateView):
     model = Gig
@@ -138,11 +154,8 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
-        print(form.instance.end_time) # "19:00:00"
-        print(form.instance.end_time.hour)
         form.send_initial_gig_email()
-        # form.instance.end_time = datetime.strptime(form.instance.end_time, "%I:%M %p")
-        
+
         return super().form_valid(form)
     
     def get_form_kwargs(self):

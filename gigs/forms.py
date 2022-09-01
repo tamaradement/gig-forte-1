@@ -8,7 +8,6 @@ from django.conf import settings
 
 
 class GigCreateForm(forms.ModelForm):
-    # end_time = forms.TimeField(input_formats=['%I:%M %p'])
     class Meta:
         model = Gig
         fields = (
@@ -42,15 +41,14 @@ class GigCreateForm(forms.ModelForm):
     
     def send_initial_gig_email(self):
         personnel = self.cleaned_data.get("personnel")
-        bandleader_first_name = self.instance.bandleader.first_name
-        bandleader_last_name = self.instance.bandleader.last_name
+        bandleader = self.instance.bandleader.first_name + ' ' + self.instance.bandleader.last_name
         from_email = settings.DEFAULT_FROM_EMAIL
 
         email_addresses = []
         for person in personnel:
             email_addresses.append(person.email)
             
-        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader_first_name, bandleader_last_name), '{}'.format(from_email), email_addresses, fail_silently=False)
+        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader), '{}'.format(from_email), email_addresses, fail_silently=False)
     
     def send_update_gig_email(self, gig):
         old_personnel = gig.personnel.all()
@@ -66,11 +64,12 @@ class GigCreateForm(forms.ModelForm):
             if person not in personnel_store:
                 email_addresses.append(person.email)
 
-        bandleader_first_name = self.instance.bandleader.first_name
-        bandleader_last_name = self.instance.bandleader.last_name
+        # bandleader_first_name = self.instance.bandleader.first_name
+        # bandleader_last_name = self.instance.bandleader.last_name
+        bandleader = self.instance.bandleader.first_name + ' ' + self.instance.bandleader.last_name
         from_email = settings.DEFAULT_FROM_EMAIL
 
-        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader_first_name, bandleader_last_name), '{}'.format(from_email), email_addresses, fail_silently=False)
+        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader), '{}'.format(from_email), email_addresses, fail_silently=False)
             
         
 
