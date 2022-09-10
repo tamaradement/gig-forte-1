@@ -10,6 +10,8 @@ Hi {{ user.first_name }}!
 <p><a href="{% url 'gig_history' %}">Gig History</a></p>
 <p><a href="{% url 'gig_invitations' %}">Gig Invitations</a></p>
 <p><a href="{% url 'venue_list' %}">Venues</a></p>
+<p><a href="{% url 'call_list' %}">Call list</a></p>
+<hr>
 {% else %}
 <br>
 <h1>How to use GigForte:</h1>
@@ -20,6 +22,7 @@ Hi {{ user.first_name }}!
     <li><a href="https://www.loom.com/share/75729a6ee37344809910b75c8137ee3d">Book a gig!</a></li>
 </ul>
 <br>
+
 <hr>
 <p>You are not logged in</p>
 <a href="{% url 'login' %}">Log In</a> |

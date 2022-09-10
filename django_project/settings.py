@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "tunes.apps.TunesConfig",
     "gigs.apps.GigsConfig",
+    "musicians.apps.MusiciansConfig", 
 ]
 
 MIDDLEWARE = [

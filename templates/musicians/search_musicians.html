@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<h1>Search Musicians</h1>
+<form method="GET">{% csrf_token %}
+    {{ filter.form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Search</button>
+</form>
+<br>
+<hr>
+{% for user in filter.qs %}
+<div>
+<h2 style="display:inline;">{{ user.first_name }} {{ user.last_name }} | {{ user.instrument }}</h2>
+<span style="float:right; display:block;">
+    <form action="{% url 'add_musician' user.pk %}" method="post">{% csrf_token %}
+        {{ form|crispy }}
+        <button 
+            class="btn btn-success ml-2" 
+            type="submit" 
+            name="user_id" 
+            value="{{ user.id }}">Add
+        </button>
+    </form>
+</span>
+</div>
+<br>
+<hr>
+{% endfor %}
+
+
+{% endblock content %}

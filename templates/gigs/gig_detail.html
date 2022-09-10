@@ -59,38 +59,42 @@
     <hr>
     <br/>
     <h3>Accept/Decline?</h3>
-
-    <form action="{% url 'accept_gig' gig.pk %}" method="post">{% csrf_token %}
-        {{ form|crispy }}
-        <button 
-            class="btn btn-success ml-2" 
-            type="submit" 
-            name="gig_id" 
-            value="{{ gig.id }}">Accept Gig
-        </button>
-    </form>
-
-<br/>
-
-    <form action="{% url 'decline_gig' gig.pk %}" method="post">{% csrf_token %}
-        {{ form|crispy }}
-        <button 
-            class="btn btn-danger ml-2" 
-            type="submit" 
-            name="gig_id" 
-            value="{{ gig.id }}">Decline Gig
-        </button>
-    </form>
+    <div style="display:inline;">
+        <span style="float:left; display:block;">
+        <form action="{% url 'accept_gig' gig.pk %}" method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <button 
+                class="btn btn-success ml-2" 
+                type="submit" 
+                name="gig_id" 
+                value="{{ gig.id }}">Accept Gig
+            </button>
+        </form>
+        </span>
+        <span style="float:left; display:block;">
+        <form action="{% url 'decline_gig' gig.pk %}" method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <button 
+                class="btn btn-danger ml-2" 
+                type="submit" 
+                name="gig_id" 
+                value="{{ gig.id }}">Decline Gig
+            </button>
+        </form>
+        </span>
+    </div>  
     
 
-
-<br/>
-</div>
+<br>
+<br>
+<div>
 {% if user == object.bandleader %}
 <p><a href="{% url 'gig_edit' gig.pk %}">Edit</a> |
     <a href="{% url 'gig_delete' gig.pk %}">Delete</a>
 </p>
 {% endif %}
-
+<br>
+<br>
 <p><a href="{% url 'gig_list' %}">Upcoming Gigs</a></p>
 {% endblock content %}
+</div>

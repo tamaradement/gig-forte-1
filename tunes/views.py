@@ -8,8 +8,6 @@ from .forms import SetlistForm
 from django.conf import settings
 
 # Tune views:
-
-
 class TuneListView(LoginRequiredMixin, ListView):
     model = Tune
     template_name = "tunes/tune_list.html"

@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("tunes/", include("tunes.urls")),
     path("gigs/", include("gigs.urls")),
+    path("musicians/", include("musicians.urls")),
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
