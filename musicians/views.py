@@ -36,5 +36,15 @@ def AddMusicianView(request, pk):
     send_add_alert(request.user, musician_to_add)
     return HttpResponseRedirect(reverse('call_list'))
 
+def RemoveMusicianView(request, pk):
+    call_list = CallList.objects.get(bandleader=request.user)
+    musicians = call_list.musicians.all()
+    musician_to_remove = ''
+    for musician in musicians:
+        if musician.id == int(request.POST.get('musician_id')):
+            musician_to_remove = CustomUser.objects.get(username=musician)
+    call_list.terminate_relationship(musician_to_remove)  
+    return HttpResponseRedirect(reverse('call_list'))
+
         
         

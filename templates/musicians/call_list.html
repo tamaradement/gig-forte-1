@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Call List{% endblock title %}
 
 {% block content %}
@@ -6,7 +7,20 @@
 <h1>Call List: {{ musicians|length }}</h1>
 <hr>
 {% for musician in musicians %}
-    <h2>{{ musician.first_name }} {{ musician.last_name }} | {{ musician.instrument }}</h2>
+    <h2 style="display:inline;">
+        {{ musician.first_name }} {{ musician.last_name }} | {{ musician.instrument }}
+    </h2>
+    <span style="float:right; display:block;">
+        <form action="{% url 'remove_musician' musician.pk %}" method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <button 
+                class="btn btn-danger ml-2" 
+                type="submit" 
+                name="musician_id" 
+                value="{{ musician.id }}">Remove
+            </button>
+        </form>
+    </span>
 <hr>
 {% endfor %}
 
