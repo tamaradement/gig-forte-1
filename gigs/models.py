@@ -6,11 +6,6 @@ from tunes.models import Setlist
 from accounts.models import CustomUser
 
 
-def default_event_date():
-    now = datetime.now().replace(hour=0, minute=0)
-    return now.strftime("%Y-%m-%d %I:%M %p") 
-
-
 class Venue(models.Model):
     name = models.CharField(max_length=255)
     address_1 = models.CharField(max_length=128)
@@ -49,9 +44,15 @@ class Gig(models.Model):
     personnel = models.ManyToManyField(CustomUser, related_name='gig_staff')
     acccepts = models.ManyToManyField(CustomUser, related_name='gig_accepts')
     declines = models.ManyToManyField(CustomUser, related_name='gig_declines')
+    additional_notes = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse("gig_detail", args=[str(self.id)])
+
+
+def default_event_date():
+    now = datetime.now().replace(hour=0, minute=0)
+    return now.strftime("%Y-%m-%d %I:%M %p") 

@@ -20,6 +20,7 @@ class GigCreateForm(forms.ModelForm):
             "pay",
             "setlist",
             "personnel",
+            "additional_notes",
         )
         widgets = {
             'event_date': DateTimePicker(
@@ -64,8 +65,6 @@ class GigCreateForm(forms.ModelForm):
             if person not in personnel_store:
                 email_addresses.append(person.email)
 
-        # bandleader_first_name = self.instance.bandleader.first_name
-        # bandleader_last_name = self.instance.bandleader.last_name
         bandleader = self.instance.bandleader.first_name + ' ' + self.instance.bandleader.last_name
         from_email = settings.DEFAULT_FROM_EMAIL
 

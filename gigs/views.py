@@ -11,11 +11,11 @@ from django.core.mail import send_mail
 from django.conf import settings
 import datetime
 
-def get_24_hour_time(str1):
-    if str1[-2:] == "AM":
-        print(True)
-    else:
-        print(False)
+# def get_24_hour_time(str1):
+#     if str1[-2:] == "AM":
+#         print(True)
+#     else:
+#         print(False)
 
 def AcceptGigView(request, pk):
     gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
@@ -155,7 +155,6 @@ class GigCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
         form.send_initial_gig_email()
-
         return super().form_valid(form)
     
     def get_form_kwargs(self):
