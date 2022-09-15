@@ -1,4 +1,3 @@
-from turtle import textinput
 import django_filters
 from accounts.models import CustomUser
 # from django.forms.widgets import TextInput
