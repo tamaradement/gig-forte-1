@@ -8,14 +8,10 @@ from .models import Gig, Venue
 from .forms import GigCreateForm
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
+from .emails import send_gig_cancel_alert
 from django.conf import settings
 import datetime
 
-# def get_24_hour_time(str1):
-#     if str1[-2:] == "AM":
-#         print(True)
-#     else:
-#         print(False)
 
 def AcceptGigView(request, pk):
     gig = get_object_or_404(Gig, id=request.POST.get('gig_id'))
@@ -131,19 +127,8 @@ class GigDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return obj.bandleader == self.request.user
     
     def delete(self, request, *args, **kwargs):
-        obj = self.get_object()
-        personnel = obj.personnel.all()
-        bandleader = obj.bandleader.first_name + ' ' + obj.bandleader.last_name
-        bandleader_email = obj.bandleader.email
-        date = obj.event_date
-        from_email = settings.DEFAULT_FROM_EMAIL
-
-        email_addresses = []
-        for person in personnel:
-            email_addresses.append(person.email)
-            
-        send_mail('Gig cancelation', 'Uh oh! Your gig with {} on {} has been canceled :-( For more details, contact your bandleader: {}'.format(bandleader, date, bandleader_email), '{}'.format(from_email), email_addresses, fail_silently=False)
-
+        gig = self.get_object()
+        send_gig_cancel_alert(gig)
         response = super(GigDeleteView, self).delete(request, *args, **kwargs)
         return response
 
