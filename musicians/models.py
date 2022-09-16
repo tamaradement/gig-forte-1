@@ -26,10 +26,6 @@ class CallList(models.Model):
 
         # Remove removee from remover's call list.
         remover_call_list.remove_musician(removee)
-
-        # Remove remover from removee's call list.
-        call_list = CallList.objects.get(bandleader=removee)
-        call_list.remove_musician(self.bandleader)
     
     def is_associate(self, musician):
         # Is there a professional relationship?
