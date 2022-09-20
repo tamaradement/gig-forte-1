@@ -14,33 +14,30 @@ Hi {{ user.first_name }}!
 <hr>
 {% else %}
 <br>
-<h1>GigForte</h1>
-<p class="lead">You didn&#8217t sign up for this. You didn&#8217t practice all of those hours so that you could sit at your computer writing emails. You want to be at your instrument; arranging and creating. GigForte is here to help you handle the annoying side of bandleading so that you have more time for what&#8217s important, the music.   
-</p>
+<div class="container text-center">
+    
+    <h1>GigForte:</h1> 
+    <hr class="w-50 mx-auto">
+    <p class="lead">An app for busy, professional musicians and bandleaders that want to spend less time at their desk and more time with their craft. You didn&#8217t practice all of those hours so that you could sit at your computer writing emails. You want to be at your instrument; arranging and creating. GigForte is here to help you handle the annoying side of bandleading so that you can focus your attention on what&#8217s important, the music.   
+    </p>
+    
+</div>
 <br>
-<hr>
-
-<h2>Simplify the administrative aspects of bandleading:</h2>
-<ul>
-    <li><h3>Store and organize sheet music.</h3></li>
-    <li><h3>Keep track of venue and personnel contacts.</h3></li>
-    <li><h3>Store full dossiers on past and upcoming gigs.</h3></li>
-    <li><h3>Easily share clear, understandable gig details with personnel.</h3></li>
-</ul>
+<hr class="w-50 mx-auto">
+<div class="container text-center">
+    <h2>Simplify the administrative aspects of bandleading.</h2>
+    <div class="lead">
+        <p>Store and organize sheet music.</p>
+        <p>Keep track of venue and personnel contacts.</p>
+        <p>Store full dossiers on past and upcoming gigs.</p>
+        <p>Easily share clear, understandable gig details with personnel.</p>
+    </div>
+    <hr class="w-50 mx-auto">
+</div>
 <br>
-<br>
-<hr>
-<h2>Get started:</h2>
-<ul>
-    <li><h3><a href="{% url 'signup' %}">Create an account.</a></h3></li>
-    <li><h3><a href="https://www.loom.com/share/8f0b57a0ad6848a88a633aff4035a891">Add some tunes.</a></h3></li>
-    <li><h3><a href="https://www.loom.com/share/5b9be8825d394aeb8b935461f87abad5">Create a setlist.</a</h3></li>
-    <li><h3><a href="https://www.loom.com/share/5b32ac6467204c6d879f803b852b6776">Add venues.</a></h3></li>
-    <li><h3><a href="https://www.loom.com/share/75729a6ee37344809910b75c8137ee3d">Book a gig!</a></h3></li>
-</ul>
-<br>
-<hr>
-<p>You are not logged in</p>
+<div class="container text-center">
+    <a href="{% url 'signup' %}" class="btn btn-primary btn-lg btn-block">Create an account!</a>
+</div>
 
 {% endif %}
 {% endblock content %}
