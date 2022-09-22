@@ -7,7 +7,8 @@ from django.urls import reverse
 from accounts.models import CustomUser
 from .filters import MusicianFilter
 from .models import CallList
-from .emails import send_add_alert
+from .emails import send_add_alert, invite_new_user
+from .forms import NewMusicianForm
 
 class CallListView(LoginRequiredMixin, TemplateView):
     template_name = "musicians/call_list.html"
@@ -45,6 +46,15 @@ def RemoveMusicianView(request, pk):
             musician_to_remove = CustomUser.objects.get(username=musician)
     call_list.terminate_relationship(musician_to_remove)  
     return HttpResponseRedirect(reverse('call_list'))
+
+
+def InviteMusicianView(request):
+    context = {}
+    context['form'] = NewMusicianForm()
+    if request.method == "POST":
+        invite_new_user(request)
+    return render(request, "musicians/invite_musician.html", context)
+
 
         
         
