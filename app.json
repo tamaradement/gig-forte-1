@@ -6,9 +6,8 @@
   "environments": {
     "test": {
       "scripts": {
-        "test": "python manage.py test"
-      },
-      "addons": ["heroku-postgresql:in-dyno"]
+        "test": "nose test"
+      }
     }
   }
 }
