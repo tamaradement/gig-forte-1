@@ -9,6 +9,7 @@
         "test": "python manage.py test"
       }
     },
+    "env": { "POSTGRESQL_VERSION": "14" },
     "addons": ["heroku-postgresql:in-dyno"]
   }
 }
