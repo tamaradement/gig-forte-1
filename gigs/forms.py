@@ -40,17 +40,6 @@ class GigCreateForm(forms.ModelForm):
         super(GigCreateForm, self).__init__(*args, **kwargs)
         self.fields["setlist"].queryset = Setlist.objects.filter(performer=performer)
     
-    def send_initial_gig_email(self):
-        personnel = self.cleaned_data.get("personnel")
-        bandleader = self.instance.bandleader.first_name + ' ' + self.instance.bandleader.last_name
-        from_email = settings.DEFAULT_FROM_EMAIL
-
-        email_addresses = []
-        for person in personnel:
-            email_addresses.append(person.email)
-            
-        send_mail('New gig offer!', 'Hello! You have a new gig offer from {} on GigForte :) Sign in to your account! https://gig-forte-1.herokuapp.com/'.format(bandleader), '{}'.format(from_email), email_addresses, fail_silently=False)
-    
     def send_update_gig_email(self, gig):
         old_personnel = gig.personnel.all()
         personnel_store = {}

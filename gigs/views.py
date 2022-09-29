@@ -8,7 +8,7 @@ from .models import Gig, Venue
 from .forms import GigCreateForm
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from .emails import send_gig_cancel_alert
+from .emails import send_gig_cancel_alert, send_initial_gig_alert
 from django.conf import settings
 import datetime
 
@@ -139,7 +139,7 @@ class GigCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.bandleader = self.request.user
-        form.send_initial_gig_email()
+        send_initial_gig_alert(form)
         return super().form_valid(form)
     
     def get_form_kwargs(self):
