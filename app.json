@@ -2,14 +2,13 @@
   "buildpacks": [
     { "url": "heroku/python" }
   ],
-
+  "addons": ["heroku-postgresql:in-dyno"],
+  "env": { "POSTGRESQL_VERSION": "14" },
   "environments": {
     "test": {
       "scripts": {
         "test": "python manage.py test"
       }
-    },
-    "env": { "POSTGRESQL_VERSION": "14" },
-    "addons": ["heroku-postgresql:in-dyno"]
+    }
   }
 }
