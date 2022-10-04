@@ -5,10 +5,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from accounts.models import CustomUser
+from gigs.models import Gig
 from .filters import MusicianFilter
 from .models import CallList
 from .emails import send_add_alert, invite_new_user
-from .forms import NewMusicianForm
+from .forms import NewMusicianForm, GigsByYear
 
 class CallListView(LoginRequiredMixin, TemplateView):
     template_name = "musicians/call_list.html"
@@ -54,6 +55,34 @@ def InviteMusicianView(request):
     if request.method == "POST":
         invite_new_user(request)
     return render(request, "musicians/invite_musician.html", context)
+
+def ComputeMusicianExpensesByYear(request):
+    context = {}
+    context['form'] = GigsByYear()
+    if request.method == "POST":
+        year = request.POST['year']
+        gigs = Gig.objects.filter(event_date__year=year).filter(bandleader=request.user)
+
+        gross_income = 0
+        total_payouts = 0
+
+        for gig in gigs:
+            # Compute payout for current gig.
+            payout = len(gig.acccepts.all()) * gig.pay
+            gross_income = gross_income + payout
+            
+            # If the bandleader was also personnel, adjust payout.
+            if gig.bandleader in gig.acccepts.all():
+                payout = payout - gig.pay
+            
+            total_payouts = total_payouts + payout
+
+        context['gigs'] = gigs
+        context['gross_income'] = gross_income
+        context['total_payouts'] = total_payouts
+        context['year'] = year
+
+    return render(request, "musicians/compute_expenses.html", context)
 
 
         

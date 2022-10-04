@@ -41,9 +41,9 @@ class Gig(models.Model):
     setlist = models.ForeignKey(
         Setlist, on_delete=models.PROTECT, blank=True, null=True
     )
-    personnel = models.ManyToManyField(CustomUser, related_name='gig_staff')
-    acccepts = models.ManyToManyField(CustomUser, related_name='gig_accepts')
-    declines = models.ManyToManyField(CustomUser, related_name='gig_declines')
+    personnel = models.ManyToManyField(CustomUser, blank=True, related_name='gig_staff')
+    acccepts = models.ManyToManyField(CustomUser, blank=True,related_name='gig_accepts')
+    declines = models.ManyToManyField(CustomUser, blank=True, related_name='gig_declines')
     additional_notes = models.TextField(blank=True)
 
     def __str__(self):

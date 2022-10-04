@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Personnel Expenses by Year</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Calculate</button>
+</form>
+<br>
+<hr>
+{% if gigs %}
+<h1>For {{ user }} in {{ year }}:</h1>
+<h2>- Number of gigs led: {{ gigs|length }}</h2>
+<h2>- Gross Income: ${{ gross_income }}</h2>
+<h2>- Total payouts to musicians: ${{ total_payouts }}</h2>
+<br>
+<hr>
+{% for gig in gigs %}
+<div class="card">
+    <div class="card-header">
+        <span class="font-weight-bold">{{ gig.title }}</span> 
+        &middot {{ gig.event_date }} | Bandleader:
+        <span class="text-muted">
+            {{ gig.bandleader }}
+        </span> |
+        <a href="{% url 'gig_detail' gig.pk %}">Details</a>
+    </div>
+    <div class="card-body">
+        {{ gig.location.name }} &middot {{ gig.location.city }}, {{ gig.location.state }} 
+        <p>Personnel Count: {{ gig.acccepts.all|length }}</p>
+    </div>
+</div>
+<br />
+
+{% endfor %}
+
+{% elif year %}
+<h1>No gigs led by {{ user }} in {{ year }}. </h1>
+{% endif %}
+
+{% endblock content %}
