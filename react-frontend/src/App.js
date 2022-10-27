@@ -9,7 +9,7 @@ class Tune extends Component {
   render() {
     return (
       <div>
-        <h2><a href={`http://www.gigforte.com/tunes/${this.props.tune.id}/`}>{this.props.tune.title}</a></h2>
+        <h2><a href={`http://127.0.0.1:8000/tunes/${this.props.tune.id}/`}>{this.props.tune.title}</a></h2>
         <p>{this.props.tune.composer} | {this.props.tune.genre}</p>
       </div>
     );
@@ -28,8 +28,9 @@ class App extends Component {
     this.handleSuccess = this.handleSuccess.bind(this);
     this.handleError = this.handleError.bind(this); 
   }
+
   componentDidMount() {
-    fetch("http://www.gigforte.com/tunes/tunes_api/")
+    fetch("http://127.0.0.1:8000/tunes/tunes_api/")
       .then((response => response.json()))
       .then(this.handleSuccess, this.handleError);
   }
@@ -45,7 +46,6 @@ class App extends Component {
 
   handleError(error) {
     console.log(error);
-    console.log("Some error");
   }
 
   render() {
