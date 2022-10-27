@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import Index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path("tunes/", include("tunes.urls")),
     path("gigs/", include("gigs.urls")),
     path("musicians/", include("musicians.urls")),
+    path("tune_list/", Index, name='index'), 
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

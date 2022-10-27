@@ -1,6 +1,7 @@
 from pathlib import Path
 from environs import Env
 from decouple import config
+import os 
 
 env = Env()
 env.read_env()
@@ -8,6 +9,7 @@ env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +40,8 @@ INSTALLED_APPS = [
     "django_filters",
     "storages",
     "tempus_dominus",
+    "rest_framework",
+    "corsheaders",  
     # Local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
@@ -49,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -59,10 +64,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "django_project.urls"
 
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR.joinpath("templates"))],
+        # Original
+        # "DIRS": [str(BASE_DIR.joinpath("templates"))],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"), 
+            os.path.join(BASE_DIR, "react-frontend/build")
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -146,6 +158,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
+# React-frontend config
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "react-frontend/build/static"),
+]
+
+
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 
@@ -178,3 +196,15 @@ TIME_INPUT_FORMATS = ('%I:%M %p',)
 
 
 
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
+
+CORS_ALLOWED_ORIGINS = (
+    "http://localhost:3000",
+    "http://localhost:8000",
+)
+
+CSRF_TRUSTED_ORIGINS = ["localhost:3000"]

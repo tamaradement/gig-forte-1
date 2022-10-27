@@ -10,6 +10,8 @@ from .views import (
     SetlistUpdateView,
     SetlistDeleteView,
     SetlistCreateView,
+    TuneListApi,
+    TuneDetailApi,
 )
 
 urlpatterns = [
@@ -27,4 +29,7 @@ urlpatterns = [
     ),
     path("setlists", SetlistCollection.as_view(), name="setlist_collection"),
     path("setlists/new/", SetlistCreateView.as_view(), name="setlist_new"),
+    # Api views
+    path("tunes_api/", TuneListApi.as_view(), name="tunes_api"),
+    path("tunes_api/<int:pk>/", TuneDetailApi.as_view(), name='tunes_api_detail'),
 ]

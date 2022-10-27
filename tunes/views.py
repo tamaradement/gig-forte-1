@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+from rest_framework import generics
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
@@ -6,6 +7,9 @@ from .models import Tune, Setlist
 from .filters import TuneFilter
 from .forms import SetlistForm
 from django.conf import settings
+from .serializers import TuneSerializer
+
+
 
 # Tune views:
 class TuneListView(LoginRequiredMixin, ListView):
@@ -126,3 +130,16 @@ class SetlistCreateView(LoginRequiredMixin, CreateView):
         kwargs = super(SetlistCreateView, self).get_form_kwargs()
         kwargs["performer"] = self.request.user
         return kwargs
+
+# Tune API views
+
+class TuneListApi(generics.ListAPIView): 
+    serializer_class = TuneSerializer
+
+    def get_queryset(self):
+        return Tune.objects.all().filter(performer=self.request.user)
+
+
+class TuneDetailApi(generics.RetrieveAPIView): 
+    queryset = Tune.objects.all() 
+    serializer_class = TuneSerializer
