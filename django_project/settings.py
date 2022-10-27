@@ -73,7 +73,7 @@ TEMPLATES = [
         # "DIRS": [str(BASE_DIR.joinpath("templates"))],
         "DIRS": [
             os.path.join(BASE_DIR, "templates"), 
-            os.path.join(BASE_DIR, "react-frontend/build")
+            os.path.join(BASE_DIR, "staticfiles/react-frontend/build")
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -160,8 +160,7 @@ STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
 # React-frontend config
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
-    os.path.join(BASE_DIR, "react-frontend/build/static"),
+    os.path.join(BASE_DIR, "staticfiles/react-frontend/build/static"),
 ]
 
 
