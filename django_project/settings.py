@@ -160,6 +160,7 @@ STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
 # React-frontend config
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static/"),
     os.path.join(BASE_DIR, "react-frontend/build/static"),
 ]
 
