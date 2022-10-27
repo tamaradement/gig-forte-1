@@ -10,11 +10,13 @@ dj-email-url==1.0.5
 Django==3.2.13
 django-bootstrap4==22.2
 django-cache-url==3.4.2
+django-cors-headers==3.10.1
 django-crispy-forms==1.13.0
 django-decouple==2.1
 django-filter==21.1
 django-storages==1.13.1
 django-tempus-dominus==5.1.2.17
+djangorestframework==3.13.1
 environs==9.3.4
 gunicorn==20.1.0
 jmespath==1.0.1
