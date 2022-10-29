@@ -1,33 +1,33 @@
-// import './App.css'
+import './App.css'
 import React, { Component } from 'react';
 
-class Tune extends Component {
-  constructor(props) {
-    super(props);
-  }
+// class Tune extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  render() {
-    return (
-      <div>
-        <h2><a href={`http://127.0.0.1:8000/tunes/${this.props.tune.id}/`}>{this.props.tune.title}</a></h2>
-        <p>{this.props.tune.composer} | {this.props.tune.genre}</p>
-      </div>
-    );
-  }
+//   render() {
+//     return (
+//       <div>
+//         <h2><a href={`http://127.0.0.1:8000/tunes/${this.props.tune.id}/`}>{this.props.tune.title}</a></h2>
+//         <p>{this.props.tune.composer} | {this.props.tune.genre}</p>
+//       </div>
+//     );
+//   }
 
-}
+// }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //     isLoading: true,
-    //     tunes: [],
-    // };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //       isLoading: true,
+  //       tunes: [],
+  //   };
 
-    // this.handleSuccess = this.handleSuccess.bind(this);
-    // this.handleError = this.handleError.bind(this); 
-  }
+  //   this.handleSuccess = this.handleSuccess.bind(this);
+  //   this.handleError = this.handleError.bind(this); 
+  // }
 
   // componentDidMount() {
   //   fetch("http://127.0.0.1:8000/tunes/tunes_api/")
