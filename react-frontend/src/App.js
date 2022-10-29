@@ -20,46 +20,46 @@ class Tune extends Component {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        isLoading: true,
-        tunes: [],
-    };
+    // this.state = {
+    //     isLoading: true,
+    //     tunes: [],
+    // };
 
-    this.handleSuccess = this.handleSuccess.bind(this);
-    this.handleError = this.handleError.bind(this); 
+    // this.handleSuccess = this.handleSuccess.bind(this);
+    // this.handleError = this.handleError.bind(this); 
   }
 
-  componentDidMount() {
-    fetch("http://127.0.0.1:8000/tunes/tunes_api/")
-      .then((response => response.json()))
-      .then(this.handleSuccess, this.handleError);
-  }
+  // componentDidMount() {
+  //   fetch("http://127.0.0.1:8000/tunes/tunes_api/")
+  //     .then((response => response.json()))
+  //     .then(this.handleSuccess, this.handleError);
+  // }
 
-  handleSuccess(responseData) {
-    console.log(responseData);
+  // handleSuccess(responseData) {
+  //   console.log(responseData);
 
-    this.setState({
-      isLoading: false,
-      tunes: responseData,
-    });
-  }
+  //   this.setState({
+  //     isLoading: false,
+  //     tunes: responseData,
+  //   });
+  // }
 
-  handleError(error) {
-    console.log(error);
-  }
+  // handleError(error) {
+  //   console.log(error);
+  // }
 
   render() {
-    let tuneList = [];
-    for (let i = 0; i < this.state.tunes.length; i++) {
-      const tune = this.state.tunes[i];
-      tuneList.push(<Tune key={i} tune={tune} />);
-    }
+    // let tuneList = [];
+    // for (let i = 0; i < this.state.tunes.length; i++) {
+    //   const tune = this.state.tunes[i];
+    //   tuneList.push(<Tune key={i} tune={tune} />);
+    // }
 
     return (
       <div>
         <h1>Tune List</h1>
-        <br></br>
-        {tuneList}
+        {/* <br></br>
+        {tuneList} */}
       </div>
     );
   }
