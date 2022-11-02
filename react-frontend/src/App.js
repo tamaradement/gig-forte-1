@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/tunes/tunes_api/")
+    fetch("https://www.gigforte.com/tunes/tunes_api/")
       .then((response => response.json()))
       .then(this.handleSuccess, this.handleError);
   }
