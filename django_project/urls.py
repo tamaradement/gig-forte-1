@@ -29,8 +29,8 @@ urlpatterns = [
     path("gigs/", include("gigs.urls")),
     path("musicians/", include("musicians.urls")),
     path("tune_list/", Index, name='index'),
-    re_path(r"^$", Index),
-    re_path(r"^(?:.*)/?$", Index), 
+    # re_path(r"^$", Index),
+    # re_path(r"^(?:.*)/?$", Index), 
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
