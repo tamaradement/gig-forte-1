@@ -41,7 +41,7 @@ class App extends React.Component {
     for (let i = 0; i < this.state.tunes.length; i++) {
       const tune = this.state.tunes[i];
       tunes.push(
-        <div>
+        <div className='tune-container'>
           <h2>
             <a href={`https://www.gigforte.com/tunes/${tune.id}`}>{tune.title}</a>
             {/* <a href={`http://127.0.0.1:8000/tunes/${tune.id}`}>{tune.title}</a> */}
