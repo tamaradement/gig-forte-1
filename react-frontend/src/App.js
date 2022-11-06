@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    
     fetch("https://www.gigforte.com/tunes/tunes_api/")
+    // fetch("http://127.0.0.1:8000/tunes/tunes_api/")
       .then((response => response.json()))
       .then(this.handleSuccess, this.handleError);
   }
@@ -37,7 +40,12 @@ class App extends React.Component {
     const tunes = [];
     for (let i = 0; i < this.state.tunes.length; i++) {
       const tune = this.state.tunes[i];
-      tunes.push(<p>{tune.title}</p>);
+      tunes.push(
+        <h2>
+          <a href={`https://www.gigforte.com/tunes/${tune.id}`}>{tune.title}</a>
+          {/* <a href={`http://127.0.0.1:8000/tunes/${tune.id}`}>{tune.title}</a> */}
+        </h2>
+      );
     }
 
     return (
