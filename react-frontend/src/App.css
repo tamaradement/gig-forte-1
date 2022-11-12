@@ -1,12 +1,43 @@
 h1 {
   text-align: center;
+  padding-bottom: 20px;
+}
+
+.parent {
+  display: flex;
+}
+
+.flex-child {
+  flex-grow: 1;
+  /* border: 1px solid blue; */
+}
+
+.flex-child:first-child {
+  /* margin-right: 10%; */
+  width: 50%;
+  padding-left: 5px;
+  /* border: 1px solid red */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 30%;
+  justify-content: center;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
 }
 
 .tune-container {
   display: flex;
   flex-direction: column;
   min-width: 30%;
-  justify-content: center;
+  justify-content: right;
   padding: 30px;
   background-color: white;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
@@ -14,4 +45,26 @@ h1 {
 
 .tune-container:hover {
   background-color: #FAF9F6
+}
+
+.search-dropdown-item {
+  background-color: white;
+  color: black;
+  padding: 12px 16px;
+}
+
+/* Dropdown button on hover & focus */
+.search-dropdown-item:hover {
+  background-color: #FAF9F6;
+}
+
+.error-message {
+  padding-top: 5px;
+  font-size: 10px;
+  color: red;
+  height: 10px;
+}
+
+.dropdown-btn {
+  background-color: white;
 }
