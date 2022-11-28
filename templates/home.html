@@ -5,7 +5,7 @@
 <!-- If logged in -->
 {% if user.is_authenticated %}
 Hi {{ user.first_name }}!
-<p><a href="{% url 'tune_list' %}">Tune library</a></p>
+<p><a href="{% url 'index' %}">Tune library</a></p>
 <p><a href="{% url 'setlist_collection' %}">Setlists</a></p>
 <p><a href="{% url 'gig_list' %}">Upcoming Gigs</a></p>
 <p><a href="{% url 'gig_history' %}">Gig History</a></p>
