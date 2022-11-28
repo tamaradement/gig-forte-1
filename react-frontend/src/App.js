@@ -180,8 +180,10 @@ class App extends React.Component {
                 >{this.state.category}
               </button>
               <p className='error-message'>{this.state.searchFormErrors.category}</p>
-              {this.state.dropdownIsClicked ? dropdownOptions : ''}
+              {this.state.dropdownIsClicked ? dropdownOptions : ''}            
               <button className='btn btn-primary btn-lg submit-button' type='Submit'>{this.state.filteredTunes.length ? "Reset" : "Search"}</button>
+        
+
             </form>
           </div>      
         </div> 

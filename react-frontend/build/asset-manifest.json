@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://tunes-1-bucket.s3.amazonaws.com/static/css/main.18af328d.css",
+    "main.css": "https://tunes-1-bucket.s3.amazonaws.com/static/css/main.ecb1801f.css",
     "main.js": "https://tunes-1-bucket.s3.amazonaws.com/static/js/main.6798af8f.js",
     "static/js/787.0f148dca.chunk.js": "https://tunes-1-bucket.s3.amazonaws.com/static/js/787.0f148dca.chunk.js",
     "index.html": "https://tunes-1-bucket.s3.amazonaws.com/index.html",
-    "main.18af328d.css.map": "https://tunes-1-bucket.s3.amazonaws.com/static/css/main.18af328d.css.map",
+    "main.ecb1801f.css.map": "https://tunes-1-bucket.s3.amazonaws.com/static/css/main.ecb1801f.css.map",
     "main.6798af8f.js.map": "https://tunes-1-bucket.s3.amazonaws.com/static/js/main.6798af8f.js.map",
     "787.0f148dca.chunk.js.map": "https://tunes-1-bucket.s3.amazonaws.com/static/js/787.0f148dca.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.18af328d.css",
+    "static/css/main.ecb1801f.css",
     "static/js/main.6798af8f.js"
   ]
 }
