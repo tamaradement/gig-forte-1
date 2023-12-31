@@ -18,8 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://www.gigforte.com/tunes/tunes_api/")
-    // fetch("http://127.0.0.1:8000/tunes/tunes_api/")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/tunes/tunes_api/`)
       .then((response => response.json()))
       .then(this.handleSuccess, this.handleError);
   }
@@ -136,8 +135,7 @@ class App extends React.Component {
       return (
         <div className='tune-container' key={tune.id}>
           <h2>
-            <a href={`https://www.gigforte.com/tunes/${tune.id}`}>{tune.title}</a>
-            {/* <a href={`http://127.0.0.1:8000/tunes/${tune.id}`}>{tune.title}</a> */}
+            <a href={`${process.env.REACT_APP_API_BASE_URL}/${tune.id}`}>{tune.title}</a>
           </h2>
           <p>{tune.composer} • {tune.key} • {tune.genre}</p>
         </div>
