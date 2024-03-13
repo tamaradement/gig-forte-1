@@ -135,7 +135,7 @@ class App extends React.Component {
       return (
         <div className='tune-container' key={tune.id}>
           <h2>
-            <a href={`${process.env.REACT_APP_API_BASE_URL}/${tune.id}`}>{tune.title}</a>
+            <a href={`${process.env.REACT_APP_API_BASE_URL}/tunes/${tune.id}`}>{tune.title}</a>
           </h2>
           <p>{tune.composer} • {tune.key} • {tune.genre}</p>
         </div>
